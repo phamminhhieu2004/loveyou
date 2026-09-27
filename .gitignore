@@ -1,0 +1,6 @@
+.codeatlas/
+.vs/
+*.obj
+*.pdb
+.DS_Store
+Thumbs.db

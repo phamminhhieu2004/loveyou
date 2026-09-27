@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gói Con Tim Làm Quà - Phiên Bản Dev ❤️</title>
+  <meta name="description"
+    content="Trang web hiệu ứng tỏ tình lập trình viên: Gói con tim làm quà theo phong cách pixel art và debugger IDE">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app-background">
+    <!-- Ambient glowing orbs -->
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <main class="main-container">
+    <!-- Top Bar with Brand & Actions -->
+    <header class="header-bar">
+      <div class="brand">
+        <span class="heart-pulse">❤️</span>
+        <span class="brand-title"> Hiếu ❤️ Huyền <span class="badge-dev">tỏ tình</span></span>
+      </div>
+      <div class="header-actions">
+        <button id="btnCustomize" class="btn-glass" title="Tùy chỉnh tên Crush & Lời thoại">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+          </svg>
+          <span>Tùy chỉnh</span>
+        </button>
+        <button id="btnTogglePhone" class="btn-glass" title="Chuyển chế độ Điện thoại / Mở rộng">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+            <line x1="12" y1="18" x2="12.01" y2="18" />
+          </svg>
+          <span class="btn-label-mode">Khung Phone</span>
+        </button>
+        <button id="btnFullscreen" class="btn-glass" title="Toàn màn hình">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Player Card -->
+    <div class="player-wrapper mode-phone" id="playerWrapper">
+      <!-- Phone Bezel Details -->
+      <div class="phone-notch">
+        <div class="camera-lens"></div>
+        <div class="speaker-grill"></div>
+      </div>
+
+      <!-- Canvas Viewport -->
+      <div class="canvas-container" id="canvasContainer">
+        <canvas id="mainCanvas"></canvas>
+
+        <!-- Play overlay on start if autoplay is blocked -->
+        <div class="play-overlay" id="playOverlay">
+          <button class="big-play-btn" id="bigPlayBtn">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            <span>Nhấn để bắt đầu nghe ❤️</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom Interactive Media Controls -->
+      <div class="player-controls">
+        <!-- Scrub bar -->
+        <div class="scrub-container" id="scrubContainer">
+          <div class="scrub-track">
+            <div class="scrub-fill" id="scrubFill"></div>
+            <div class="scrub-handle" id="scrubHandle"></div>
+          </div>
+        </div>
+
+        <div class="controls-row">
+          <div class="controls-left">
+            <button class="btn-ctrl" id="btnPlayPause" title="Phát / Dừng (Phím Space)">
+              <svg id="iconPlay" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+              <svg id="iconPause" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16" />
+                <rect x="14" y="4" width="4" height="16" />
+              </svg>
+            </button>
+            <button class="btn-ctrl" id="btnRestart" title="Phát lại từ đầu (Phím R)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M1 4v6h6" />
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+              </svg>
+            </button>
+            <div class="time-display" id="timeDisplay">00:00 / 00:46</div>
+          </div>
+
+          <div class="controls-right">
+            <button class="btn-pill-sub" id="btnKaraokeToggle" title="Bật/Tắt Lời bài hát (Phím T)">
+              <span class="dot-active"></span>
+              <span>Karaoke</span>
+            </button>
+            <button class="btn-ctrl" id="btnMute" title="Âm thanh">
+              <svg id="iconVolume" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Shortcuts Legend -->
+    <footer class="keyboard-legend">
+      <span><kbd>Space</kbd> Phát/Dừng</span>
+      <span><kbd>R</kbd> Bắt đầu lại</span>
+      <span><kbd>T</kbd> Lời bài hát</span>
+      <span><kbd>C</kbd> Tùy chỉnh Crush</span>
+      <span><kbd>F</kbd> Toàn màn hình</span>
+    </footer>
+  </main>
+
+  <!-- Customization Modal -->
+  <div class="modal-backdrop hidden" id="modalBackdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>💌 Tùy chỉnh phiên bản tỏ tình</h3>
+        <button class="btn-close" id="btnCloseModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputCrush">Tên người nhận (Crush):</label>
+          <input type="text" id="inputCrush" value="Huyền" placeholder="Huyền" maxlength="20">
+        </div>
+        <div class="form-group">
+          <label for="inputSpeech1">Lời tỏ tình của Hiếu (0:00):</label>
+          <input type="text" id="inputSpeech1" value="Hiếu thích Huyền" placeholder="Ví dụ: Hiếu thích Huyền...">
+        </div>
+        <div class="form-group">
+          <label for="inputSpeech2">Lời đồng ý của Huyền (0:40):</label>
+          <input type="text" id="inputSpeech2" value="ừ, Huyền đồng ý" placeholder="Ví dụ: ừ, Huyền đồng ý...">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btnResetDefault">Khôi phục mặc định</button>
+        <button class="btn-primary" id="btnSaveCustomize">Lưu & Tỏ tình ❤️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Sources -->
+  <audio id="audioPlayer" preload="auto">
+    <source src="Music.mp3" type="audio/mpeg">
+    <source src="audio.m4a" type="audio/mp4">
+    <source src="reference.mp4" type="audio/mp4">
+  </audio>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
