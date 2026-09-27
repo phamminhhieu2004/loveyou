@@ -42,9 +42,8 @@ Dự án tái hiện trọn vẹn và nâng cấp hiệu ứng tỏ tình lập 
    - Con trỏ debugger `▶` màu xanh lướt từng dòng code khớp chuẩn xác với từng câu hát.
    - Tô màu cú pháp (Syntax Highlighting) chuyên nghiệp: từ khóa, tên hàm, chuỗi, biến số.
 
-3. **Thanh Marquee Ticker & Sticker Bình luận TikTok:**
+3. **Thanh Marquee Ticker:**
    - Dòng chữ chạy ngang mượt mà: `Gói Con Tim Làm Quà • Hiếu ❤️ Huyền • Phạm Minh Hiếu • karaoke mode...`
-   - Sticker bình luận TikTok góc trên: `Reply to @huyen's comment: if (Huyền đồng ý)`.
 
 4. **Tính Năng Tùy Chỉnh Riêng Cho Crush:**
    - Bấm phím **C** (hoặc nút **Tùy chỉnh**): Có thể chỉnh sửa nhanh tên người nhận, lời ngỏ ý và câu đồng ý bất kỳ lúc nào.

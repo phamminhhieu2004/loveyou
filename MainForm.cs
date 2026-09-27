@@ -43,7 +43,6 @@ namespace GoiConTimLamQua
         private Font bubbleFont;
         private Font statusFont;
         private Font marqueeFont;
-        private Font tiktokFont;
 
         public MainForm()
         {
@@ -79,7 +78,6 @@ namespace GoiConTimLamQua
             bubbleFont = new Font("Segoe UI", 9.5f, FontStyle.Bold);
             statusFont = new Font("Consolas", 8.5f, FontStyle.Regular);
             marqueeFont = new Font("Segoe UI", 9.0f, FontStyle.Regular);
-            tiktokFont = new Font("Segoe UI", 8.0f, FontStyle.Regular);
         }
 
         private void InitParticles()
@@ -413,8 +411,6 @@ namespace GoiConTimLamQua
                 }
             }
 
-            // TikTok Comment Card Sticker (Top-Left corner)
-            DrawTikTokCommentCard(g, 16, y + 14);
         }
 
         private void DrawSpeechBubble(Graphics g, string text, float targetX, float targetY, bool pointLeft)
@@ -470,49 +466,6 @@ namespace GoiConTimLamQua
             }
         }
 
-        private void DrawTikTokCommentCard(Graphics g, float cx, float cy)
-        {
-            float cardW = 190f;
-            float cardH = 46f;
-
-            using (GraphicsPath path = new GraphicsPath())
-            {
-                float r = 6f;
-                path.AddArc(cx, cy, r * 2, r * 2, 180, 90);
-                path.AddArc(cx + cardW - r * 2, cy, r * 2, r * 2, 270, 90);
-                path.AddArc(cx + cardW - r * 2, cy + cardH - r * 2, r * 2, r * 2, 0, 90);
-                path.AddArc(cx, cy + cardH - r * 2, r * 2, r * 2, 90, 90);
-                path.CloseFigure();
-
-                using (SolidBrush b = new SolidBrush(System.Drawing.Color.FromArgb(230, 255, 255, 255)))
-                {
-                    g.FillPath(b, path);
-                }
-                using (Pen p = new Pen(System.Drawing.Color.FromArgb(80, 0, 0, 0), 1f))
-                {
-                    g.DrawPath(p, path);
-                }
-            }
-
-            // Small profile circle
-            using (SolidBrush avatarBrush = new SolidBrush(System.Drawing.Color.FromArgb(255, 64, 129)))
-            {
-                g.FillEllipse(avatarBrush, cx + 8, cy + 8, 16, 16);
-            }
-
-            using (SolidBrush titleBrush = new SolidBrush(System.Drawing.Color.FromArgb(120, 120, 120)))
-            {
-                g.DrawString("Reply to @yuhtahn's comment", tiktokFont, titleBrush, cx + 28, cy + 6);
-            }
-
-            using (SolidBrush textBrush = new SolidBrush(System.Drawing.Color.FromArgb(20, 20, 20)))
-            {
-                using (Font boldFont = new Font("Segoe UI", 8.5f, FontStyle.Bold))
-                {
-                    g.DrawString("if (Huyền đồng ý)", boldFont, textBrush, cx + 28, cy + 22);
-                }
-            }
-        }
 
         private void DrawMarqueeBar(Graphics g, int x, int y, int w, int h, TimelineState state)
         {
@@ -828,7 +781,6 @@ namespace GoiConTimLamQua
                 if (bubbleFont != null) bubbleFont.Dispose();
                 if (statusFont != null) statusFont.Dispose();
                 if (marqueeFont != null) marqueeFont.Dispose();
-                if (tiktokFont != null) tiktokFont.Dispose();
             }
             base.Dispose(disposing);
         }

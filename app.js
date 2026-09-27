@@ -759,8 +759,6 @@ function drawTopScene(h, state) {
   }
   ctx.globalAlpha = 1.0;
 
-  // TikTok Comment Card
-  drawTikTokCard(14, 14);
 }
 
 function drawSpeechBubble(text, targetX, targetY, pointLeft) {
@@ -801,34 +799,6 @@ function drawSpeechBubble(text, targetX, targetY, pointLeft) {
   ctx.fillText(text, bx + padX, by + 16);
 }
 
-function drawTikTokCard(x, y) {
-  const w = 175;
-  const h = 42;
-
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
-  ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  roundRect(ctx, x, y, w, h, 8);
-  ctx.fill();
-  ctx.stroke();
-
-  // Avatar
-  ctx.fillStyle = PAL.heart;
-  ctx.beginPath();
-  ctx.arc(x + 18, y + 21, 9, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Subtitle
-  ctx.fillStyle = '#6b7280';
-  ctx.font = '10px "Plus Jakarta Sans", sans-serif';
-  ctx.fillText("Reply to @yuhtahn's comment", x + 34, y + 16);
-
-  // Content
-  ctx.fillStyle = '#111827';
-  ctx.font = 'bold 11px "Plus Jakarta Sans", sans-serif';
-  ctx.fillText('if (Huyền đồng ý)', x + 34, y + 31);
-}
 
 function drawMarquee(y, h) {
   ctx.fillStyle = '#12151d';
